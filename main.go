@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -23,8 +22,9 @@ var albums = []album{
 }
 
 func main() {
-	fmt.Println("Rest API!")
-	fmt.Println("https://go.dev/doc/tutorial/web-service-gin")
+
+	// Mensagens de boas vindas
+	Welcome()
 
 	router := gin.Default()
 	router.GET("/albums", getAlbums)
