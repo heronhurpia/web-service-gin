@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/heronhurpia/web-service-gin/apis" 
 	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
-
+ 
 // album represents data about a record album.
 type album struct {
 	ID     string  `json:"id"`
@@ -25,14 +25,23 @@ func main() {
 
 	// Mensagens de boas vindas
 	Welcome()
-
+	
 	router := gin.Default()
 	router.GET("/albums", getAlbums)
 	router.POST("/albums", postAlbums)
 	router.GET("/albums/:id", getAlbumByID)
+	router.GET("/get_complete_channel_list", complete_channel_list)
 
 	router.Run("localhost:8080")
 }
+
+
+
+func complete_channel_list(c *gin.Context) {
+	server.Get_complete_channel_list(c)
+}
+
+
 
 // getAlbums responds with the list of all albums as JSON.
 func getAlbums(c *gin.Context) {
