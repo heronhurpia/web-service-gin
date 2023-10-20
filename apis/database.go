@@ -41,7 +41,7 @@ func GetAllChannels() []log {
 	fmt.Println("Connected!")
 
 //	rows, err := db.Query(`SELECT "id","name_en" FROM "public"."dishes" limit 5`)
-	rows, err := db.Query(`SELECT "id","description" FROM "sat"."comments" limit 5`)
+	rows, err := db.Query(`SELECT "id","description","commentable_type","commentable_id","updated_at","created_at" FROM "sat"."comments" order by id desc limit 5`)
 	CheckError(err)
 	defer rows.Close()
 
@@ -64,11 +64,20 @@ func GetAllChannels() []log {
 		defer file.Close()
 	*/
 
+	fmt.Println("rows scan")
 	var logs []log
 	for rows.Next() {
-	  	var description string
-	  	var id int
-	  	err = rows.Scan(&id, &description)
+
+		fmt.Println(rows)
+
+		var id int
+		var description string
+		var commentable_type string
+		var commentable_id	int
+		var updated_at	string
+		var created_at	string
+
+		err = rows.Scan(&id, &description,&commentable_type,&commentable_id,&updated_at,&created_at)
 	  	CheckError(err)
 
 		var l log 
