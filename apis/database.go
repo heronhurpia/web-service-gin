@@ -41,7 +41,7 @@ func GetAllChannels() []log {
 	fmt.Println("Connected!")
 
 //	rows, err := db.Query(`SELECT "id","name_en" FROM "public"."dishes" limit 5`)
-	rows, err := db.Query(`SELECT "id","description","commentable_type","commentable_id","updated_at","created_at" FROM "sat"."comments" order by id desc limit 5`)
+	rows, err := db.Query(`SELECT "id","description","commentable_type","commentable_id","updated_at","created_at" FROM "sat"."comments" order by id desc limit 20`)
 	CheckError(err)
 	defer rows.Close()
 
