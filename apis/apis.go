@@ -18,7 +18,7 @@ type album struct {
 
 // album represents data about a record album.
 type log struct {
-	ID     string  `json:"id"`
+	ID     int  `json:"id"`
 	Description  string  `json:"description"`
 }
 
@@ -32,10 +32,8 @@ var albums = []album{
 // getAlbums responds with the list of all albums as JSON.
 func Get_complete_channel_list(c *gin.Context) {
 
-	discos := GetAllChannels()
-	fmt.Println("discos: ",discos)
-
-	c.IndentedJSON(http.StatusOK, discos)
+	logs := GetAllChannels()
+	c.IndentedJSON(http.StatusOK, logs)
 
 }
 

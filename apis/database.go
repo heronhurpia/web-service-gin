@@ -9,8 +9,6 @@ import (
 	//"path/filepath"
 
 	_ "github.com/lib/pq"
-	//"encoding/json"
-	//"github.com/heronhurpia/web-service-gin/helper" 
 )
 
 const (
@@ -43,7 +41,7 @@ func GetAllChannels() []log {
 	fmt.Println("Connected!")
 
 //	rows, err := db.Query(`SELECT "id","name_en" FROM "public"."dishes" limit 5`)
-	rows, err := db.Query(`SELECT "id","description" FROM "sat"."comments" limit 20`)
+	rows, err := db.Query(`SELECT "id","description" FROM "sat"."comments" limit 5`)
 	CheckError(err)
 	defer rows.Close()
 
@@ -66,34 +64,20 @@ func GetAllChannels() []log {
 		defer file.Close()
 	*/
 
-	// for rows.Next() {
-	// // 	//var name_en string
-	//  	var description string
-	//  	var id int
-	//  	err = rows.Scan(&id, &description)
-	//  	CheckError(err)
+	var logs []log
+	for rows.Next() {
+	  	var description string
+	  	var id int
+	  	err = rows.Scan(&id, &description)
+	  	CheckError(err)
 
-	// 	dat =: helper.Comment{
-	// 	 	Id : id
-	// 	 	Description : description
-	// 	}
-	// 	fmt.Print(dat)
-	// // 	data := fmt.Sprintf("%d. %s\n", id, description)
-	// // 	fmt.Print(data)
-	// // 	//_, err := file.WriteString(data)
-	// // 	CheckError(err)
-	// }
-
-	//fmt.Printf("t1: %T\n", rows)
-	//resp, err := json.Marshal(rows)
-	CheckError(err)
-
-	var logs = []log{
-		{ID: "1", Description: "Blue Train"},
-		{ID: "2", Description: "Jeru"},
-		{ID: "3", Description: "Sarah Vaughan and Clifford Brown"},
+		var l log 
+		l.ID = id 
+		l.Description = description
+		logs = append(logs,l)
+		fmt.Println(l)
 	}
-	
+
 	return logs ;
 }
 
