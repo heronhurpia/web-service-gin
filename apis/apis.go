@@ -20,6 +20,9 @@ type album struct {
 type log struct {
 	ID     int  `json:"id"`
 	Description  string  `json:"description"`
+	Commentable_type  string  `json:"commentable_type"`
+	Commentable_id	int `json:"commentable_id"`
+	Created_at	string `json:"created_at"`
 }
 
 // albums slice to seed record album data.

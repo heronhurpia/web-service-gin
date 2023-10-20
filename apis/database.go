@@ -68,8 +68,6 @@ func GetAllChannels() []log {
 	var logs []log
 	for rows.Next() {
 
-		fmt.Println(rows)
-
 		var id int
 		var description string
 		var commentable_type string
@@ -83,8 +81,10 @@ func GetAllChannels() []log {
 		var l log 
 		l.ID = id 
 		l.Description = description
+		l.Commentable_type = commentable_type
+		l.Commentable_id = commentable_id
+		l.Created_at = created_at
 		logs = append(logs,l)
-		fmt.Println(l)
 	}
 
 	return logs ;
